@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sude & Adem</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', sans-serif;
+        overflow: hidden;
+        background: linear-gradient(to top right, #ffe3ec, #ffeef4);
+        animation: fadeIn 2s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      .hearts {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+      }
+
+      .hearts span {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center;
+        background-size: contain;
+        animation: floatHearts 10s linear infinite;
+        opacity: 0.7;
+      }
+
+      @keyframes floatHearts {
+        0% {
+          transform: translateY(100vh) rotate(0deg);
+          opacity: 0;
+        }
+        50% {
+          opacity: 0.8;
+        }
+        100% {
+          transform: translateY(-10vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      .login-box {
+        z-index: 1;
+        position: relative;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 400px;
+        margin: auto;
+        top: 50%;
+        transform: translateY(-50%);
+        text-align: center;
+        margin-top: 40%;
+      }
+
+      .message-box {
+        margin-top: 15px;
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- Arka Plan Animasyonu -->
+    <div class="hearts">
+      <!-- 15 adet kalp randomly -->
+      <span style="left: 5%; animation-delay: 0s;"></span>
+      <span style="left: 15%; animation-delay: 2s;"></span>
+      <span style="left: 25%; animation-delay: 4s;"></span>
+      <span style="left: 35%; animation-delay: 1s;"></span>
+      <span style="left: 45%; animation-delay: 3s;"></span>
+      <span style="left: 55%; animation-delay: 5s;"></span>
+      <span style="left: 65%; animation-delay: 1.5s;"></span>
+      <span style="left: 75%; animation-delay: 2.5s;"></span>
+      <span style="left: 85%; animation-delay: 0.5s;"></span>
+      <span style="left: 95%; animation-delay: 3.5s;"></span>
+    </div>
+
+    <!-- Login Kutusu -->
+    <div class="login-box">
+      <h3>💖 Sadece Biz 💖</h3>
+      <p class="text-muted">Birini seç, şifreni gir ve giriş yap ✨</p>
+
+      <select class="form-select mb-3" id="personSelect">
+        <option value="" selected disabled>Kimi seçiyorsun?</option>
+        <option value="Sude">Sude</option>
+        <option value="Adem">Adem</option>
+      </select>
+
+      <input type="password" class="form-control mb-3" id="passwordInput" placeholder="Şifre gir...">
+
+      <button onclick="checkLogin()" class="btn btn-danger w-100">🔐 Giriş Yap</button>
+
+      <div class="message-box text-danger" id="errorBox" style="display: none;"></div>
+      <div class="message-box text-success" id="messageBox" style="display: none;"></div>
+    </div>
+
+    <script>
+  function checkLogin() {
+    const user = document.getElementById("personSelect").value.toLowerCase();
+    const pass = document.getElementById("passwordInput").value;
+
+    const passwords = {
+      "sude": "1234",  // buraya gerçek şifrenizi yazabilirsiniz
+      "adem": "4321"
+    };
+
+    const correctPassword = passwords[user];
+
+    if (!user || !pass) {
+      document.getElementById("errorBox").style.display = "block";
+      document.getElementById("errorBox").innerText = "Lütfen kullanıcı ve şifre girin.";
+      return;
+    }
+
+    if (pass === correctPassword) {
+      // Başarılı giriş mesajı (isteğe bağlı)
+      alert(`Hoş geldin ${user === "sude" ? "Sude 🌸" : "Adem 😎"}!`);
+      // Ana sayfaya yönlendir
+      window.location.href = "index.html";
+    } else {
+      document.getElementById("errorBox").style.display = "block";
+      document.getElementById("errorBox").innerText = "Şifre yanlış! Tekrar dene.";
+    }
+  }
+    </script>
+  </div>
+</div>
+  </body>
+</html>
